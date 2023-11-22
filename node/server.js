@@ -19,6 +19,8 @@ app.get("/api", (req, res, next) => {
 
 app.listen(PORT , () => {
     console.log(`Running on port ${PORT}`);
+    console.log('tying to get env')
+    console.log(process.env.MONGO_URL)
     connect_mongo();
 });
 
