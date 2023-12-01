@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
+import Nav from "./navBar/nav";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Login />} />
 					<Route path="/signup" element={<Signup />} />
+					<Route path="/home" element={<Nav />} />
 					<Route path="*" element={<h1> 404 page not found</h1>} />
 				</Routes>
 			</Router>

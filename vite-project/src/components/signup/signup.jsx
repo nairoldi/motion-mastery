@@ -1,8 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import React, { useRef, useState, useEffect } from "react";
+import axios from "../../api/axios";
 
 export default function Signup() {
+	const REGISTER_URL = "/login/signup";
+
 	const userRef = useRef();
 	const errRef = useRef();
 
@@ -10,11 +13,32 @@ export default function Signup() {
 	const [pass, setPass] = useState("");
 	const [user, setUser] = useState("");
 
+	const [errMsg, setErrMsg] = useState("");
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		console.log(email);
 		console.log(pass);
 		console.log(user);
+		const new_user = { email: email, pass: pass, user: user };
+
+		try {
+			const responce = await axios.post(REGISTER_URL, new_user);
+			// responce from server
+			console.log(responce.data);
+			console.log(responce.accessToken);
+			// full responce object
+			console.log(JSON.stringify(responce));
+		} catch (err) {
+			if (!err?.response) {
+				setErrMsg("No Server Response");
+			} else if (err.response?.status === 409) {
+				setErrMsg("Username Taken");
+			} else {
+				setErrMsg("Registration Failed");
+			}
+			//errRef.current.focus();
+		}
 	};
 
 	return (
@@ -77,7 +101,7 @@ export default function Signup() {
 							type="submit"
 							className="mt-6 w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
 						>
-							Login
+							sign up
 						</button>
 					</form>
 					<p className="mt-8 text-xs font-light text-center text-gray-700">

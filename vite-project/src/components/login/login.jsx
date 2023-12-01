@@ -1,9 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 
 export default function Login() {
+	const navigate = useNavigate();
 	const REGISTER_URL = "/login/login";
 
 	const errRef = useRef();
