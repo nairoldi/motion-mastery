@@ -38,14 +38,14 @@ async function createAccount(req, res, next) {
 		}
 
 		await new_user.save();
-        res.send({"created": true});
+        res.status(200).send({"created": true});
 
 	} catch (error) {
 		console.log("new signup failed");
 	    // console.log(error.message);
         if(error.code == 11000){ res.send({"created": false, "message": "Email already exists! try logging in"}); }
         else{
-            res.send({"created": false, "message": e.message});
+            res.status(200).send({"created": false, "message": e.message});
         }
     }
 }

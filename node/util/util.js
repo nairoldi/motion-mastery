@@ -31,9 +31,9 @@ function ValidateToken(req, res, next) {
    * @param {*} keys properties that will be looked for in the object
    */
   function checkKeys(object, keys){
-    // console.log(object);
-    // console.log(keys);
-
+    console.log(object);
+    //console.log(keys);
+    console.log(`[${Object.keys(object)}] v.s [${keys}]`);
     if(!object) {
       return false;
     }
