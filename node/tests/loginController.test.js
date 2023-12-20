@@ -34,3 +34,14 @@ describe('POST /login/signup', () => {
     })
     // another test for database connection
 })
+
+// login test
+describe('POST /login/login', () => {
+    describe('given a username and password that exists in the db', () => {
+        test('it should respond with 200 and the jwt', async() => {
+            const response = await request(app).post('/login/login').send(userObject);
+            console.log(response.body);
+            expect(response.statusCode).toBe(200);
+        })
+    })
+})
