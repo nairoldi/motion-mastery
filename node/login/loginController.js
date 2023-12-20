@@ -38,42 +38,47 @@ async function createAccount(req, res, next) {
 		}
 
 		await new_user.save();
-        res.send({"created": true});
+        res.status(200).send({"created": true});
 
 	} catch (error) {
 		console.log("new signup failed");
 	    // console.log(error.message);
         if(error.code == 11000){ res.send({"created": false, "message": "Email already exists! try logging in"}); }
         else{
-            res.send({"created": false, "message": e.message});
+            res.status(200).send({"created": false, "message": e.message});
         }
     }
 }
 
 async function signIn(req, res, next) {
-	var email = req.email;
-	var pass = req.pass;
+	var email = req.body.email;
+	var pass = req.body.pass;
+
 	try {
+		
 		const user = await User.findOne({ email: email });
+
 		if (user) {
-			const passCompare = bcrypt.compare(pass, user.password);
+
+			const passCompare = await bcrypt.compare(pass, user.password);
 
 			if (passCompare) {
-                console.log(user);
                 try {
-                    var token = jwt.sign({id:user._id},  config.jwtSecret);
-                    res.send({jwtToken:token});
+                    var token = jwt.sign({id:user._id},  process.env.jwtSecret);
+                    res.send({jwtToken:token, });
                 }
                 catch(e){
                     next(e.message);
                 }
             } 
             else {
-				next("password was not a match");
+				res.status(200).send({'message' : 'password was not a match'});
+				next();
 			}
 		} 
         else {
-            next('no user with that email exists')
+			res.status(200).send({'message' : 'no user with that email exists'});
+            next()
 		}
 	} catch (e) {
         res.status(401).send(e.message);
