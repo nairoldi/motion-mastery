@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
 
 function Nav() {
 	return (
-		<div className="app">
-			<div> NavBar </div>
-		</div>
+		<nav>
+			<Link to="/home"> Home </Link>
+		</nav>
 	);
 }
 
