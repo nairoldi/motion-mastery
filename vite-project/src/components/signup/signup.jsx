@@ -1,9 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import React, { useRef, useState, useEffect } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
 import axios from "../../api/axios";
+import Login from "../Login/login";
 
 export default function Signup() {
+	const navigate = useNavigate();
 	const REGISTER_URL = "/login/signup";
 
 	const userRef = useRef();
@@ -29,6 +32,7 @@ export default function Signup() {
 			console.log(responce.accessToken);
 			// full responce object
 			console.log(JSON.stringify(responce));
+			if (responce.status == 201) navigate("/");
 		} catch (err) {
 			if (!err?.response) {
 				setErrMsg("No Server Response");
@@ -38,6 +42,7 @@ export default function Signup() {
 				setErrMsg("Registration Failed");
 			}
 			//errRef.current.focus();
+			return;
 		}
 	};
 

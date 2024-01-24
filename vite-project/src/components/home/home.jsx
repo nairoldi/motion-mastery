@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useState } from "react";
 
-const home = () => {
+export default function Home() {
+	const [authenticated, setauthenticated] = useState(null);
+
 	return <div>home page</div>;
-};
-
-export default home;
+}
