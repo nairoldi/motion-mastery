@@ -64,9 +64,14 @@ async function signIn(req, res, next) {
 
 			if (passCompare) {
                 try {
-					var token = jwt.sign({ id: user._id }, process.env.jwtSecret);
-					const hashed_token = bcrypt.hashSync(token, 10);
-                    res.status(200).send({jwtToken:hashed_token, 'message':'success' });
+					var accessToken = jwt.sign({ id: user._id }, process.env.jwtSecret, { expiresIn: '30s' });
+					var refreshToken = jwt.sign({ id: user._id }, process.env.refreshSecret, { expiresIn: '1d' });
+					user.refreshToken = refreshToken;
+					await user.save();
+					//const hashed_token = bcrypt.hashSync(token, 10);
+					// 24 * 60 * 60 * 1000 is one day because its in mili seconds 
+					res.cookie('jwt', refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000})
+                    res.status(200).cookie.send({accessToken:accessToken, 'message':`success ${user.username} is logged in` });
                 }
                 catch(e){
                     next(e.message);
@@ -78,7 +83,7 @@ async function signIn(req, res, next) {
 			}
 		} 
         else {
-			res.send(404).send({'message' : 'no user with that email exists'});
+			res.send(401).send({'message' : 'no user with that email exists'});
             next()
 		}
 	} catch (e) {

@@ -10,7 +10,7 @@ export default function RequireAuth() {
     if the user is logged in and has any token, return the Outlet(any child componet of require auth) 
     aka it will allow them to access protected routes 
     */
-	return auth?.token ? (
+	return auth?.accessToken ? (
 		<Outlet />
 	) : (
 		<Navigate to="/" state={{ from: location }} replace />

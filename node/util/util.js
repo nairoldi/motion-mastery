@@ -8,14 +8,14 @@ const jwt = require('jsonwebtoken');
 function ValidateToken(req, res, next) {
     //console.log(req.headers);
     const token = req.headers['authorization'];
-    
+  console.log(token);
     if(!token) {
       return next('no token recieved');
     }
     // should have token here , time to verify
     jwt.verify(token, jwtSecret, (err, user) => {
       if(err) {
-        return next('this token is no longer valid')
+        return res.Status(403).send({ 'message': 'this token is no longer valid' });
       }
       // by now the token is valid and we can attatch the user to the request
       console.log(user);

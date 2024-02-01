@@ -9,11 +9,12 @@ const PORT = process.env.SERVER_PORT || 3001;
 
 // routers
 const Login = require("./login/loginRoutes").LoginRouter;
+const User = require('./user/userRoutes').UserRouter;
 
 // test entry point
 app.get("/api", (req, res, next) => {
 	console.log("your in /api");
-	res.status(200).send("you made it");
+	res.send("you made it");
 	next();
 });
 
@@ -24,18 +25,18 @@ app.use("", (req, res, next) => {
 
 // mount routers
 app.use("/login", Login);
+app.use('/user', User);
+
 
 app.listen(PORT, async () => {
 	console.log(`Running on port ${PORT}`);
-	console.log("tying to get env");
-	console.log(process.env.MONGO_URL);
 	connect_mongo();
 });
 
 async function connect_mongo() {
 	try {
 		await mongoose.connect(process.env.MONGO_URL);
-		//console.log("we have connected to mongo!!");
+		console.log("we have connected to mongo!!");
 	} catch (error) {
 		//console.log("connection failed");
 		console.log(error.message);
