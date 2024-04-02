@@ -5,12 +5,13 @@ import UseAuth from "../../hooks/useAuth";
 export default function RequireAuth() {
 	const { auth } = UseAuth();
 	const location = useLocation();
-
+	console.log("auth:", auth);
 	/* 
-    if the user is logged in and has any token, return the Outlet(any child componet of require auth) 
-    aka it will allow them to access protected routes 
-    */
-	return auth?.accessToken ? (
+    if the user is logged in and has any token, the outlet represents any child compnent nested inside. 
+	these childern will be protected if the user is signed in 
+	*/
+	//might need to be token
+	return auth?.token ? (
 		<Outlet />
 	) : (
 		<Navigate to="/" state={{ from: location }} replace />

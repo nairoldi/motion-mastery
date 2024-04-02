@@ -53,6 +53,8 @@ async function createAccount(req, res, next) {
 async function signIn(req, res, next) {
 	var email = req.body.email;
 	var pass = req.body.pass;
+	console.log('in signIn');
+	console.log(email);
 
 	try {
 		
@@ -64,14 +66,14 @@ async function signIn(req, res, next) {
 
 			if (passCompare) {
                 try {
-					var accessToken = jwt.sign({ id: user._id }, process.env.jwtSecret, { expiresIn: '30s' });
+					var accessToken = jwt.sign({ id: user._id }, process.env.jwtSecret, { expiresIn: '90s' });
 					var refreshToken = jwt.sign({ id: user._id }, process.env.refreshSecret, { expiresIn: '1d' });
 					user.refreshToken = refreshToken;
 					await user.save();
 					//const hashed_token = bcrypt.hashSync(token, 10);
 					// 24 * 60 * 60 * 1000 is one day because its in mili seconds 
 					res.cookie('jwt', refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000})
-                    res.status(200).cookie.send({accessToken:accessToken, 'message':`success ${user.username} is logged in` });
+                    res.json({accessToken:accessToken, 'message':`success ${user.username} is logged in` });
                 }
                 catch(e){
                     next(e.message);

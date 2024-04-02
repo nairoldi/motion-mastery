@@ -3,13 +3,18 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const app = express();
 const cors = require("cors");
+const cookieParser = require('cookie-parser');
+
 app.use(cors());
+app.use(cookieParser());
 
 const PORT = process.env.SERVER_PORT || 3001;
 
 // routers
 const Login = require("./login/loginRoutes").LoginRouter;
 const User = require('./user/userRoutes').UserRouter;
+const Auth = require('./auth/authRoutes').AuthRouter;
+
 
 // test entry point
 app.get("/api", (req, res, next) => {
@@ -26,7 +31,7 @@ app.use("", (req, res, next) => {
 // mount routers
 app.use("/login", Login);
 app.use('/user', User);
-
+app.use('/auth', Auth);
 
 app.listen(PORT, async () => {
 	console.log(`Running on port ${PORT}`);

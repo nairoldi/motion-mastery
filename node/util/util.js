@@ -7,10 +7,10 @@ const jwt = require('jsonwebtoken');
  */
 function ValidateToken(req, res, next) {
     //console.log(req.headers);
-    const token = req.headers['authorization'];
+  const token = req.headers['authorization'];
   console.log(token);
     if(!token) {
-      return next('no token recieved');
+      return res.status(401).send({ 'message': 'no token recieved' });
     }
     // should have token here , time to verify
     jwt.verify(token, jwtSecret, (err, user) => {
@@ -30,9 +30,11 @@ function ValidateToken(req, res, next) {
    * @param {*} object object in which we are looking for a specific property
    * @param {*} keys properties that will be looked for in the object
    */
-  function checkKeys(object, keys){
-    //console.log(object);
-    //console.log(keys);
+function checkKeys(object, keys) {
+  console.log('checkKeys');
+    console.log(object);
+    console.log('keys');
+    console.log(keys);
     console.log(`[${Object.keys(object)}] v.s [${keys}]`);
     if(!object) {
       return false;

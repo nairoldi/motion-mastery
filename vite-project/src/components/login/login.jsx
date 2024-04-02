@@ -15,8 +15,7 @@ export default function Login() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	// maybe not home ?
-	const from = location.state?.from?.pathname || "/home";
-
+	const from = location.state?.from?.pathname || "/";
 	const REGISTER_URL = "/login/login";
 
 	const [email, setEmail] = useState("");
@@ -39,24 +38,26 @@ export default function Login() {
 		console.log(email);
 		console.log(pass);
 		const login_user = { email: email, pass: pass };
+		console.log("user set");
 		try {
+			console.log("in try");
 			const responce = await axios.post(REGISTER_URL, login_user);
 			console.log("token should be under here");
-			console.log(responce.data.jwtToken);
+			console.log(responce.data.accessToken);
 			// responce from server
 			console.log(responce.data);
-
 			// full responce object
 			console.log(JSON.stringify(responce));
-			const token = responce?.data.jwtToken;
+			const token = responce?.data.accessToken;
 			setAuth({ email, token });
 			setEmail("");
 			setPass("");
-			navigate(from, { replace: true });
+			console.log("Navigating to /home...");
+			navigate("/home", { replace: true });
 		} catch (err) {
 			if (!err?.response) {
 				setErrMsg("No Server Response");
-			} else if (err.responce?.status === 400) {
+			} else if (err.response?.status === 400) {
 				setErrMsg("Missing Username or Password");
 			} else if (err.response?.status === 409) {
 				setErrMsg("Username Taken");

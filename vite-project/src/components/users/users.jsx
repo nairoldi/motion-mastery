@@ -1,17 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
-import axios from "../../api/axios";
+import UseAxiosPrivte from "../../hooks/useAxiosPrivate";
 
 export default function User() {
 	const [user, setUser] = useState();
+	const axiosPrivate = UseAxiosPrivte();
 
 	useEffect(() => {
+		//
 		let isMounted = true;
 		// can cancle a request
 		const controller = new AbortController();
-		const getUser = async () => {
+		async function getUser() {
 			try {
-				const responce = axios.get("/user/myInfo", {
+				const responce = axiosPrivate.get("/user/myInfo", {
 					Signal: controller.signal,
 				});
 				console.log(responce.data);
@@ -19,10 +22,10 @@ export default function User() {
 			} catch (e) {
 				console.error(e);
 			}
-		};
+		}
 
 		getUser();
-
+		// clen up function runs as ismounted is set to false
 		return () => {
 			isMounted = false;
 			controller.abort();

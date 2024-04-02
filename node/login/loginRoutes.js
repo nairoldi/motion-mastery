@@ -16,8 +16,9 @@ LoginRouter.use("", (req, res, next) => {
 	res.locals.bodyData = req.body;
 	console.log(req.path);
 	console.log(req.body);
-	//console.log(req);
-	sutil.verifyObject(req.body, REQ_KEYS[req.path], next);
+	//console.log(REQ_KEYS.path);
+	//sutil.verifyObject(req.body, REQ_KEYS[req.path], next);
+	next()
 });
 
 LoginRouter.post("/signup", (req, res, next) => {

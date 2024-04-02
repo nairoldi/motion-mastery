@@ -9,9 +9,7 @@ export default function Home() {
 	return (
 		<div>
 			<h1>home page</h1>
-			<br>
-				<User />
-			</br>
+			<br></br>
 		</div>
 	);
 }
