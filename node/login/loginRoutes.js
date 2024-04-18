@@ -12,7 +12,7 @@ REQ_KEYS = {
 	"/login": ["email", "pass"],
 };
 
-LoginRouter.use("", (req, res, next) => {
+LoginRouter.use("", async (req, res, next) => {
 	res.locals.bodyData = req.body;
 	console.log(req.path);
 	console.log(req.body);
@@ -21,11 +21,11 @@ LoginRouter.use("", (req, res, next) => {
 	next()
 });
 
-LoginRouter.post("/signup", (req, res, next) => {
+LoginRouter.post("/signup", async (req, res, next) => {
 	loginController.createAccount(req, res, next);
 });
 
-LoginRouter.post("/login", (req, res, next) => {
+LoginRouter.post("/login", async (req, res, next) => {
 	loginController.signIn(req, res, next);
 });
 

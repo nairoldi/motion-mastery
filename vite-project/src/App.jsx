@@ -3,8 +3,9 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Login from "./components/Login/login";
 import Signup from "./components/signup/signup";
-import Nav from "./navBar/nav";
+import NavBar from "./navBar/nav";
 import Home from "./components/home/home";
+import User from "./components/users/users";
 import "./App.css";
 import RequireAuth from "./components/auth/requireAuth";
 
@@ -14,6 +15,7 @@ function App() {
 	return (
 		<div className="app">
 			<BrowserRouter>
+				<NavBar />
 				<Routes>
 					{/* public routes */}
 					<Route path="/" element={<Login />} />
@@ -22,6 +24,7 @@ function App() {
 					{/* private routes */}
 					<Route element={<RequireAuth />}>
 						<Route path="/home" element={<Home />} />
+						<Route path="/myInfo" element={<User />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

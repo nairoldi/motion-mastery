@@ -26,7 +26,10 @@ export default function Signup() {
 		const new_user = { email: email, pass: pass, user: user };
 
 		try {
-			const responce = await axios.post(REGISTER_URL, new_user);
+			const responce = await axios.post(REGISTER_URL, new_user, {
+				headers: { "Content-Type": "application/json" },
+				withCredentials: true,
+			});
 			// responce from server
 			console.log(responce.data);
 			console.log(responce.accessToken);

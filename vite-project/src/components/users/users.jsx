@@ -1,11 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import UseAxiosPrivte from "../../hooks/useAxiosPrivate";
+import useRefreshToken from "../../hooks/useRefreshToken";
 
 export default function User() {
 	const [user, setUser] = useState();
 	const axiosPrivate = UseAxiosPrivte();
+	const refresh = useRefreshToken();
+
+	const REGISTER_URL = "/login/login";
 
 	useEffect(() => {
 		//
@@ -13,8 +17,9 @@ export default function User() {
 		// can cancle a request
 		const controller = new AbortController();
 		async function getUser() {
+			console.log("in getUser frontend");
 			try {
-				const responce = axiosPrivate.get("/user/myInfo", {
+				const responce = await axiosPrivate.get("/user/myInfo", {
 					Signal: controller.signal,
 				});
 				console.log(responce.data);

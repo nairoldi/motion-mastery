@@ -2,7 +2,7 @@
 import UseAuth from "./useAuth";
 import axios from "../api/axios";
 
-export default function UseRefreshToken() {
+export default function useRefreshToken() {
 	const { setAuth } = UseAuth();
 
 	const REGISTER_URL = "/auth/";
@@ -12,6 +12,7 @@ export default function UseRefreshToken() {
 		const responce = await axios.get(REGISTER_URL, { withCredentials: true });
 
 		setAuth((prev) => {
+			console.log("userefreshtoken");
 			console.log(JSON.stringify(prev));
 			console.log(responce.data.accessToken);
 			return { ...prev, accessToken: responce.data.accessToken };

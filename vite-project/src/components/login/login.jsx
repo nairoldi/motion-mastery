@@ -41,7 +41,10 @@ export default function Login() {
 		console.log("user set");
 		try {
 			console.log("in try");
-			const responce = await axios.post(REGISTER_URL, login_user);
+			const responce = await axios.post(REGISTER_URL, login_user, {
+				headers: { "Content-Type": "application/json" },
+				withCredentials: true,
+			});
 			console.log("token should be under here");
 			console.log(responce.data.accessToken);
 			// responce from server

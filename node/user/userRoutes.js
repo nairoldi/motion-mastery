@@ -12,17 +12,28 @@ const userController = require('./userController.js');
 
 REQ_KEYS = {	};
 
+UserRouter.use((req, res, next) => {
+	console.log('Request reached UserRouter middleware');
+	console.log('Cookies:', req.cookies);
+	res.locals.bodyData = req.body;
+	console.log(req.path);
+	sutil.ValidateToken(req, res, next);
+    next;
+});
+
 UserRouter.use('', (req, res, next) => {
     res.locals.bodyData = req.body;
 	console.log(req.path);
-	console.log(req.body);
+	sutil.ValidateToken(req.body);
 	//console.log(req);
 	//sutil.verifyObject(req.body, REQ_KEYS[req.path], next);
-	sutil.ValidateToken(req.body, res, next());
+	next;
 });
 
-UserRouter.get('/myInfo', (req, res, next) => {
-	userController.getUserInfo(res, req, next);
+//UserRouter.use(sutil.ValidateToken);
+
+UserRouter.get('/myInfo', async (req, res, next) => {
+	userController.getUserInfo(req, res, next);
 });
 
 module.exports = {

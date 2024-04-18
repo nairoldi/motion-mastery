@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import UseAuth from "../../hooks/useAuth";
+const Secret = import.meta.env.jwtSecret;
 
 export default function RequireAuth() {
 	const { auth } = UseAuth();

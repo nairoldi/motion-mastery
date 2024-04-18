@@ -1,29 +1,48 @@
 const jwt = require('jsonwebtoken');
-
+const { jwtSecret } = require('../config/loginConfig');
 
 
 /**
  * JWT validation middleware, verify our JWT in requests
  */
 function ValidateToken(req, res, next) {
-    //console.log(req.headers);
-  const token = req.headers['authorization'];
-  console.log(token);
-    if(!token) {
+  console.log('in validate token');
+  console.log(req.cookies.JWT_TOKEN);
+  console.log(JSON.stringify(req.headers));
+  const authHeader = req.headers['authorization'];
+  console.log('Authorization Header:', authHeader);
+   if(!authHeader) {
       return res.status(401).send({ 'message': 'no token recieved' });
     }
+  const token = authHeader.split(' ')[1];
+  if (!token) {
+        return res.status(401).send({ 'message': 'No token provided' });
+  }
+  
+   // Log the token splitting
+    const tokenParts = authHeader.split(' ');
+    console.log('Token Parts:', tokenParts);
+
+    // Extract token from tokenParts
+    const token1 = tokenParts[1];
+    console.log('Token:', token1);
+  //console.log(req.cookies.jwt);
+  console.log('token below')
+  console.log(token);
+   
     // should have token here , time to verify
     jwt.verify(token, jwtSecret, (err, user) => {
-      if(err) {
-        return res.Status(403).send({ 'message': 'this token is no longer valid' });
+        if(err) {
+          return res.status(403).send({ 'message': 'this token is no longer valid' });
+        }
+        // by now the token is valid and we can attatch the user to the request
+        console.log(user);
+        res.locals.user = user.id; //  moved this to be added into the response object, unsure if we are allowed to add to the request object at this stage
+        //console.log(json.stringify(user));
+        //console.log(user);
+        next();
       }
-      // by now the token is valid and we can attatch the user to the request
-      console.log(user);
-      res.locals.user = user.id; //  moved this to be added into the response object, unsure if we are allowed to add to the request object at this stage
-      //console.log(json.stringify(user));
-      //console.log(user);
-      next()
-    })
+    )
   }
   /**
    * makes sure all the needed keys are in the object

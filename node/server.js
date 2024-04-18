@@ -5,16 +5,22 @@ const app = express();
 const cors = require("cors");
 const cookieParser = require('cookie-parser');
 
-app.use(cors());
+const ValidateToken = require('./util/util').ValidateToken;
+
+app.use(cors({ origin: 'http://localhost:3000',  credentials: true}));
 app.use(cookieParser());
+
+app.use((req, res, next) => {
+    console.log('Cookies:', req.cookies);
+    next();
+});
 
 const PORT = process.env.SERVER_PORT || 3001;
 
 // routers
 const Login = require("./login/loginRoutes").LoginRouter;
-const User = require('./user/userRoutes').UserRouter;
 const Auth = require('./auth/authRoutes').AuthRouter;
-
+const User = require('./user/userRoutes').UserRouter;
 
 // test entry point
 app.get("/api", (req, res, next) => {
@@ -23,15 +29,18 @@ app.get("/api", (req, res, next) => {
 	next();
 });
 
-app.use("", (req, res, next) => {
-	//res.header("Access-Control-Allow-Origin", "true");
-	next();
+app.use((req, res, next) => {
+
+    //console.log('Cookies:', req.cookies);
+    next();
 });
 
-// mount routers
+// routes
 app.use("/login", Login);
-app.use('/user', User);
 app.use('/auth', Auth);
+//app.use(ValidateToken);
+app.use('/user', User);
+
 
 app.listen(PORT, async () => {
 	console.log(`Running on port ${PORT}`);
