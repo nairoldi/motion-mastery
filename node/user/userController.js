@@ -5,7 +5,9 @@ const config = require('../config/loginConfig');
 async function getUserInfo(req, res, next) {
     console.log('in getUserInfo');
     const token = req.cookies['jwt'];
-    console.log(token);
+    console.log(`token: ${token}`);
+    console.log(`req headers: ${req.headers}`);
+    next();
     /*
     try {
         const user = await User.findById({ _id: id })

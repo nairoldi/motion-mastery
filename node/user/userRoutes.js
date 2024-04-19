@@ -18,17 +18,10 @@ UserRouter.use((req, res, next) => {
 	res.locals.bodyData = req.body;
 	console.log(req.path);
 	sutil.ValidateToken(req, res, next);
-    next;
+    next();
 });
 
-UserRouter.use('', (req, res, next) => {
-    res.locals.bodyData = req.body;
-	console.log(req.path);
-	sutil.ValidateToken(req.body);
-	//console.log(req);
-	//sutil.verifyObject(req.body, REQ_KEYS[req.path], next);
-	next;
-});
+
 
 //UserRouter.use(sutil.ValidateToken);
 

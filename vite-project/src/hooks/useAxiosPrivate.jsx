@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import axios, { axiosPrivate } from "../api/axios";
+import { axiosPrivate } from "../api/axios";
 import { useEffect } from "react";
 import UseRefreshToken from "./useRefreshToken";
 import UseAuth from "./useAuth";
@@ -27,11 +27,11 @@ export default function UseAxiosPrivte() {
 	useEffect(() => {
 		console.log("in use axios private");
 		const responceIntercept = axiosPrivate.interceptors.response.use(
-			(responce) => responce,
+			(response) => response,
 			// if our token is expired
 			async (error) => {
 				const prevRequest = error?.config;
-				if (error?.responce?.status === 403 && !prevRequest?.sent) {
+				if (error?.response?.status === 403 && !prevRequest?.sent) {
 					// only want to retry once , the sent property indicates that
 					prevRequest.sent = true;
 					const newAccessToken = await refresh();
@@ -49,7 +49,7 @@ export default function UseAxiosPrivte() {
 			axiosPrivate.interceptors.response.eject(responceIntercept);
 			axiosPrivate.interceptors.request.eject(requestIntercept);
 		};
-	}, [auth, refresh]);
+	}, [auth.accessToken, refresh]);
 
 	return axiosPrivate;
 }

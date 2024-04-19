@@ -23,8 +23,9 @@ export default function User() {
 			try {
 				const responce = await axiosPrivate.get("/user/myInfo", {
 					Signal: controller.signal,
-					headers: { Authorization: `Bearer ${auth.token}` },
+					//headers: { Authorization: `Bearer ${auth.token}` },
 				});
+				console.log("before responce");
 				console.log(`myInfo responce: ${responce.data}`);
 				isMounted && setUser(responce.data);
 			} catch (e) {
@@ -44,6 +45,7 @@ export default function User() {
 	return (
 		<article>
 			<h2>Users List</h2>
+			<h1></h1>
 			<br />
 		</article>
 	);

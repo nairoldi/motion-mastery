@@ -83,7 +83,6 @@ async function signIn(req, res, next) {
 				res.cookie('JWT_TOKEN', refreshToken, {
 					secure: true,
 					httpOnly: true,
-					sameSite: "strict",
 				});
 				console.log("After setting cookie");
 				res.json({
