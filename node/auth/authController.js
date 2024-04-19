@@ -18,6 +18,7 @@ async function handleRefreshToken(req, res, next) {
                 jwt.verify(refreshToken, process.env.refreshSecret, (err, decoded) => {
                     if (err || user._id !== decoded.id) return res.status(403);
                     const accessToken = jwt.sign({ id: user._id }, process.env.jwtSecret, { expiresIn: '120s' }); // play with then with new route from home page
+                    console.log(`in handle refresh token: token=> ${accessToken}`);
                     res.json({ accessToken });
                 });
 		} 

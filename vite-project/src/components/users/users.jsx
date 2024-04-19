@@ -3,8 +3,10 @@
 import { useState, useEffect, useRef } from "react";
 import UseAxiosPrivte from "../../hooks/useAxiosPrivate";
 import useRefreshToken from "../../hooks/useRefreshToken";
+import UseAuth from "../../hooks/useAuth";
 
 export default function User() {
+	const { auth } = UseAuth();
 	const [user, setUser] = useState();
 	const axiosPrivate = UseAxiosPrivte();
 	const refresh = useRefreshToken();
@@ -21,10 +23,12 @@ export default function User() {
 			try {
 				const responce = await axiosPrivate.get("/user/myInfo", {
 					Signal: controller.signal,
+					headers: { Authorization: `Bearer ${auth.token}` },
 				});
-				console.log(responce.data);
+				console.log(`myInfo responce: ${responce.data}`);
 				isMounted && setUser(responce.data);
 			} catch (e) {
+				console.log("failed in users component");
 				console.error(e);
 			}
 		}
@@ -40,15 +44,7 @@ export default function User() {
 	return (
 		<article>
 			<h2>Users List</h2>
-			{user?.length ? (
-				<ul>
-					{user.map((users, i) => (
-						<li key={i}> {user?.id}</li>
-					))}
-				</ul>
-			) : (
-				<p> No user to display </p>
-			)}
+			<br />
 		</article>
 	);
 }

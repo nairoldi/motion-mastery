@@ -11,8 +11,10 @@ export default function RequireAuth() {
     if the user is logged in and has any token, the outlet represents any child compnent nested inside. 
 	these childern will be protected if the user is signed in 
 	*/
-	//might need to be token
-	return auth?.token ? (
+	/*right now the auth state just needs to have an email to be authorized to access the protected routes. later on i
+	can change this to have roles and only allow a user with a specific role to access a route
+	*/
+	return auth?.email ? (
 		<Outlet />
 	) : (
 		<Navigate to="/" state={{ from: location }} replace />
