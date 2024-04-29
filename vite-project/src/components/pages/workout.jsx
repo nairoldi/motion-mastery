@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import preExistingMotionsData from "../../../../node/preloadMotions/preloadMotions.json";
+import UseAxiosPrivte from "../../hooks/useAxiosPrivate";
+import useRefreshToken from "../../hooks/useRefreshToken";
 
 export default function WorkoutForm() {
 	const [workoutName, setWorkoutName] = useState("");
@@ -9,7 +11,18 @@ export default function WorkoutForm() {
 	const [sets, setSets] = useState(0);
 	const [reps, setReps] = useState(0);
 	const [time, setTime] = useState(0);
+	const [weight, setWeight] = useState(0);
 	const [addedMotions, setAddedMotions] = useState([]);
+
+	// to set focus on the form when the components load
+	const userRef = useRef();
+	// set focus on first input when the component loads
+	useEffect(() => {
+		userRef.current.focus();
+	}, []);
+
+	const axiosPrivate = UseAxiosPrivte();
+	//const refresh = useRefreshToken();
 
 	const handleAddMotion = () => {
 		if (selectedMotion || newMotion.trim() !== "") {
@@ -18,6 +31,7 @@ export default function WorkoutForm() {
 				sets: sets,
 				reps: reps,
 				time: time,
+				weight: weight,
 			};
 			setAddedMotions([...addedMotions, motionToAdd]);
 			setSelectedMotion("");
@@ -25,6 +39,7 @@ export default function WorkoutForm() {
 			setSets(0);
 			setReps(0);
 			setTime(0);
+			setWeight(0);
 		}
 	};
 
@@ -32,6 +47,34 @@ export default function WorkoutForm() {
 		const updatedMotions = [...addedMotions];
 		updatedMotions.splice(index, 1);
 		setAddedMotions(updatedMotions);
+	};
+
+	const handleSubmit = async () => {
+		let workoutData;
+		if (addedMotions.length > 0) {
+			workoutData = {
+				name: workoutName,
+				motions: addedMotions,
+			};
+		}
+
+		console.log(`Data to be sent: ${JSON.stringify(workoutData)}`);
+
+		try {
+			const response = axiosPrivate.post("/user/createworkout", workoutData, {
+				headers: { "Content-Type": "application/json" },
+				withCredentials: true,
+			});
+			console.log("workoutCreated successfully", response.data);
+			setAddedMotions([]);
+			setSelectedMotion("");
+			setNewMotion("");
+			setSets(0);
+			setReps(0);
+			setTime(0);
+		} catch (err) {
+			console.error("Error creating workout:", err);
+		}
 	};
 
 	return (
@@ -49,9 +92,10 @@ export default function WorkoutForm() {
 				<input
 					type="text"
 					id="workoutName"
+					ref={userRef}
 					value={workoutName}
 					onChange={(e) => setWorkoutName(e.target.value)}
-					className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+					className="mt-1 text-center block  w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg"
 				/>
 			</div>
 
@@ -119,6 +163,21 @@ export default function WorkoutForm() {
 			</div>
 			<div className="mb-4">
 				<label
+					htmlFor="sets"
+					className="block text-sm font-medium text-gray-700"
+				>
+					weight:
+				</label>
+				<input
+					type="number"
+					id="weight"
+					value={weight}
+					onChange={(e) => setWeight(parseInt(e.target.value))}
+					className="w-20 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+				/>
+			</div>
+			<div className="mb-4">
+				<label
 					htmlFor="time"
 					className="block text-sm font-medium text-gray-700"
 				>
@@ -162,6 +221,15 @@ export default function WorkoutForm() {
 						</button>
 					</div>
 				))}
+			</div>
+			<div className="mt-4">
+				<button
+					type="button"
+					onClick={handleSubmit}
+					className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+				>
+					Finish Creating Workout
+				</button>
 			</div>
 		</div>
 	);

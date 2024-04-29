@@ -27,6 +27,13 @@ const userSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
+	workouts: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+			ref: "Workout",
+			createdDate: Date.now(),
+        },
+    ],
 });
 
 module.exports = mongoose.model("Users", userSchema);

@@ -20,6 +20,9 @@ const motionSchema = new mongoose.Schema({
     reps: {
         type: Number,
     },
+    weight: {
+        type: Number,
+    },
     time: {
         type: Number,
     },

@@ -6,12 +6,12 @@ require("dotenv").config();
  * JWT validation middleware, verify our JWT in requests
  */
 function ValidateToken(req, res, next) {
-	//console.log("in validate token");
+	console.log("in validate token");
 	//console.log(`jwtsecret: ${process.env.jwtSecret}`)
 	//console.log(req.cookies.JWT_TOKEN);
 	//console.log(JSON.stringify(req.headers));
 	const authHeader = req.headers["authorization"];
-	//console.log("Authorization Header:", JSON.stringify(authHeader));
+	console.log("Authorization Header:", JSON.stringify(authHeader));
 	if (!authHeader) {
 		return res.status(401).send({ message: "no token recieved" });
 	}

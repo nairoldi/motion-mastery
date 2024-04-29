@@ -19,6 +19,10 @@ UserRouter.get('/myInfo', async (req, res, next) => {
 	await userController.getUserInfo(req, res, next);
 });
 
+UserRouter.post('/createworkout', async (req, res, next) => {
+	await userController.createWorkout(req, res, next);
+});
+
 module.exports = {
     UserRouter:UserRouter,
 }
