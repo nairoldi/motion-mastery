@@ -6,6 +6,7 @@ import Signup from "./components/signup/signup";
 import NavBar from "./navBar/nav";
 import Home from "./components/home/home";
 import MyInfo from "./components/pages/myInfo";
+import Workout from "./components/pages/workout";
 import "./App.css";
 import RequireAuth from "./components/auth/requireAuth";
 import Layout from "./components/layout/layout";
@@ -27,6 +28,7 @@ function App() {
 						<Route element={<RequireAuth />}>
 							<Route path="/home" element={<Home />} />
 							<Route path="/myInfo" element={<MyInfo />} />
+							<Route path="/workouts" element={<Workout />} />
 						</Route>
 					</Route>
 				</Routes>
