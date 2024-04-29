@@ -23,7 +23,7 @@ export default function MyInfo() {
 			try {
 				const response = await axiosPrivate.get("/user/myInfo", {
 					Signal: controller.signal,
-					headers: { Authorization: `Bearer ${auth.token}` },
+					//headers: { Authorization: `Bearer ${auth.token}` },
 				});
 				console.log("before response");
 				console.log(`myInfo response: ${response.data}`);
