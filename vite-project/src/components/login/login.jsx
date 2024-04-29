@@ -45,12 +45,12 @@ export default function Login() {
 				headers: { "Content-Type": "application/json" },
 				withCredentials: true,
 			});
-			console.log("token should be under here");
-			console.log(responce.data.accessToken);
+			//console.log("token should be under here");
+			//.log(responce.data.accessToken);
 			// responce from server
-			console.log(responce.data);
+			//console.log(responce.data);
 			// full responce object
-			console.log(JSON.stringify(responce));
+			//console.log(JSON.stringify(responce));
 			const token = responce?.data.accessToken;
 			setAuth({ email, token });
 			setEmail("");

@@ -15,8 +15,7 @@ export default function UseAxiosPrivte() {
 	 *        response interceptor: - It allows you to write or execute a piece of your code before response reaches the calling end.
 	 */
 	useEffect(() => {
-		console.log("in use axios private");
-
+		//console.log("in use axios private");
 		const requestIntercept = axiosPrivate.interceptors.request.use(
 			(config) => {
 				// if the headers dont exist , its the inital request
@@ -37,7 +36,7 @@ export default function UseAxiosPrivte() {
 					// only want to retry once , the sent property indicates that
 					prevRequest.sent = true;
 					const newAccessToken = await refresh();
-					console.log(`inAxiosPrivate: new token => ${newAccessToken}`);
+					//console.log(`inAxiosPrivate: new token => ${newAccessToken}`);
 					prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
 					//updated the request with new token, try request again
 					return axiosPrivate(prevRequest);

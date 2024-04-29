@@ -55,8 +55,8 @@ async function createAccount(req, res, next) {
 async function signIn(req, res, next) {
 	var email = req.body.email;
 	var pass = req.body.pass;
-	console.log("in signIn");
-	console.log(email);
+	//console.log("in signIn");
+	//console.log(email);
 
 	try {
 		const user = await User.findOne({ email: email });
@@ -72,7 +72,7 @@ async function signIn(req, res, next) {
 				await user.save();
 				//const hashed_token = bcrypt.hashSync(token, 10);
 				// 24 * 60 * 60 * 1000 is one day because its in mili seconds
-				console.log("Before setting cookie");
+				//console.log("Before setting cookie");
 				res.clearCookie("JWT_TOKEN");
 				//res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
 				res.cookie("JWT_TOKEN", refreshToken, {
@@ -80,7 +80,7 @@ async function signIn(req, res, next) {
 					httpOnly: true,
 					maxAge: 24 * 60 * 60 * 1000,
 				});
-				console.log("After setting cookie");
+				//console.log("After setting cookie");
 				res.json({
 					accessToken: accessToken,
 					message: `success ${user.username} is logged in`,

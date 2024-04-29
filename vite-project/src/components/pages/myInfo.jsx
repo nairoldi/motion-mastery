@@ -6,7 +6,6 @@ import useRefreshToken from "../../hooks/useRefreshToken";
 import UseAuth from "../../hooks/useAuth";
 
 export default function MyInfo() {
-	const { auth } = UseAuth();
 	const [user, setUser] = useState();
 	const axiosPrivate = UseAxiosPrivte();
 	const refresh = useRefreshToken();
@@ -19,14 +18,13 @@ export default function MyInfo() {
 		// can cancle a request
 		const controller = new AbortController();
 		async function getUser() {
-			console.log("in getUser frontend");
+			//console.log("in getUser frontend");
 			try {
 				const response = await axiosPrivate.get("/user/myInfo", {
 					Signal: controller.signal,
 					//headers: { Authorization: `Bearer ${auth.token}` },
 				});
-				console.log("before response");
-				console.log(`myInfo response: ${response.data}`);
+				//console.log(`myInfo response: ${JSON.stringify(response.data)}`);
 				isMounted && setUser(response.data);
 			} catch (e) {
 				console.log("failed in users component");
