@@ -1,11 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
-
 const sutil = require("../util/util");
-
-// import controller when ready
-
 const UserRouter = express.Router(); 
 UserRouter.use(bodyParser.json());
 const userController = require('./userController.js');
@@ -18,15 +13,10 @@ UserRouter.use((req, res, next) => {
 	res.locals.bodyData = req.body;
 	console.log(req.path);
 	sutil.ValidateToken(req, res, next);
-    next();
 });
 
-
-
-//UserRouter.use(sutil.ValidateToken);
-
 UserRouter.get('/myInfo', async (req, res, next) => {
-	userController.getUserInfo(req, res, next);
+	await userController.getUserInfo(req, res, next);
 });
 
 module.exports = {

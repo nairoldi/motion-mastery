@@ -65,14 +65,9 @@ async function signIn(req, res, next) {
 			const passCompare = await bcrypt.compare(pass, user.password);
 
 			if (passCompare) {
-				var accessToken = jwt.sign({ id: user._id }, process.env.jwtSecret, {
-					expiresIn: "90s",
-				});
-				var refreshToken = jwt.sign(
-					{ id: user._id },
-					process.env.refreshSecret,
-					{ expiresIn: "1d" }
-				);
+				console.log(user._id);
+				var accessToken = jwt.sign({ id: user._id }, process.env.jwtSecret, { expiresIn: "90s" });
+				var refreshToken = jwt.sign({ id: user._id }, process.env.refreshSecret,{ expiresIn: "1d" });
 				user.refreshToken = refreshToken;
 				await user.save();
 				//const hashed_token = bcrypt.hashSync(token, 10);
@@ -80,9 +75,10 @@ async function signIn(req, res, next) {
 				console.log("Before setting cookie");
 				res.clearCookie("JWT_TOKEN");
 				//res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
-				res.cookie('JWT_TOKEN', refreshToken, {
+				res.cookie("JWT_TOKEN", refreshToken, {
 					secure: true,
 					httpOnly: true,
+					maxAge: 24 * 60 * 60 * 1000,
 				});
 				console.log("After setting cookie");
 				res.json({

@@ -4,19 +4,19 @@ const config = require('../config/loginConfig');
 
 async function getUserInfo(req, res, next) {
     console.log('in getUserInfo');
-    const token = req.cookies['jwt'];
-    console.log(`token: ${token}`);
-    console.log(`req headers: ${req.headers}`);
-    next();
-    /*
+    console.log(`user: ${req.user}`);
+    //const token = req.cookies['jwt'];
+    //console.log(`token: ${token}`);
+    //console.log(`req headers: ${req.headers}`);
+    
     try {
-        const user = await User.findById({ _id: id })
+        const user = await User.findById({ _id: req.user })
         res.json(user);
     } catch (e) {
         console.error(e);
         res.status(500).json({ message: 'Server Error' });
     }
-    */
+    
 }
 
 module.exports = { getUserInfo: getUserInfo }

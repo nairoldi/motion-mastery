@@ -5,7 +5,7 @@ import UseAxiosPrivte from "../../hooks/useAxiosPrivate";
 import useRefreshToken from "../../hooks/useRefreshToken";
 import UseAuth from "../../hooks/useAuth";
 
-export default function User() {
+export default function MyInfo() {
 	const { auth } = UseAuth();
 	const [user, setUser] = useState();
 	const axiosPrivate = UseAxiosPrivte();
@@ -21,13 +21,13 @@ export default function User() {
 		async function getUser() {
 			console.log("in getUser frontend");
 			try {
-				const responce = await axiosPrivate.get("/user/myInfo", {
+				const response = await axiosPrivate.get("/user/myInfo", {
 					Signal: controller.signal,
-					//headers: { Authorization: `Bearer ${auth.token}` },
+					headers: { Authorization: `Bearer ${auth.token}` },
 				});
-				console.log("before responce");
-				console.log(`myInfo responce: ${responce.data}`);
-				isMounted && setUser(responce.data);
+				console.log("before response");
+				console.log(`myInfo response: ${response.data}`);
+				isMounted && setUser(response.data);
 			} catch (e) {
 				console.log("failed in users component");
 				console.error(e);
@@ -44,9 +44,16 @@ export default function User() {
 
 	return (
 		<article>
-			<h2>Users List</h2>
-			<h1></h1>
-			<br />
+			<h2>User Info</h2>
+			{user && (
+				<div>
+					<p>Name: {user.name}</p>
+					<p>Email: {user.email}</p>
+					<p>Username: {user.username}</p>
+					<p>Created Date: {new Date(user.createdDate).toLocaleString()}</p>
+					{/* Add more fields as needed */}
+				</div>
+			)}
 		</article>
 	);
 }

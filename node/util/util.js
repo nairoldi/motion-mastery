@@ -1,15 +1,17 @@
 const jwt = require("jsonwebtoken");
+const { jwtSecret } = require("../config/loginConfig");
 require("dotenv").config();
 
 /**
  * JWT validation middleware, verify our JWT in requests
  */
 function ValidateToken(req, res, next) {
-  console.log("in validate token");
+	console.log("in validate token");
+	console.log(`jwtsecret: ${process.env.jwtSecret}`)
 	//console.log(req.cookies.JWT_TOKEN);
-	//console.log(JSON.stringify(req.headers));
+	console.log(JSON.stringify(req.headers));
 	const authHeader = req.headers["authorization"];
-	console.log("Authorization Header:", authHeader);
+	console.log("Authorization Header:", JSON.stringify(authHeader));
 	if (!authHeader) {
 		return res.status(401).send({ message: "no token recieved" });
 	}
@@ -19,16 +21,14 @@ function ValidateToken(req, res, next) {
   }
  
 	// should have token here , time to verify
-	jwt.verify(token, process.env.jwtSecret, (err, user) => {
+	jwt.verify(token, process.env.jwtSecret, (err, decoded) => {
 		if (err) {
 			console.log("failed jwt verification");
 			return res.status(403).send({ message: "this token is no longer valid" });
 		}
 		// by now the token is valid and we can attatch the user to the request
-		console.log(JSON.stringify(user));
-		res.locals.user = user.id; //  moved this to be added into the response object, unsure if we are allowed to add to the request object at this stage
-		//console.log(json.stringify(user));
-		//console.log(user);
+		console.log(`decoded: ${JSON.stringify(decoded)}`);
+		req.user = decoded.id; //  moved this to be added into the response object, unsure if we are allowed to add to the request object at this stage
 		next();
 	});
 }

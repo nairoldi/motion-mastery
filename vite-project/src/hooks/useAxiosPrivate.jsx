@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { axiosPrivate } from "../api/axios";
+import axiosPrivate from "../api/axios";
 import { useEffect } from "react";
 import UseRefreshToken from "./useRefreshToken";
 import UseAuth from "./useAuth";
@@ -9,16 +9,6 @@ export default function UseAxiosPrivte() {
 	const refresh = UseRefreshToken();
 	const { auth } = UseAuth();
 
-	const requestIntercept = axiosPrivate.interceptors.request.use(
-		(config) => {
-			// if the headers dont exist , its the inital request
-			if (!config.headers["Authorization"]) {
-				config.headers["Authorization"] = `Bearer ${auth?.accessToken}`;
-			}
-			return config;
-		},
-		(error) => Promise.reject(error)
-	);
 	/*
 	 *    Interceptors are methods which are triggered before or after the main method. There are two types of interceptors:
 	 *        request interceptor: - It allows you to write or execute a piece of your code before the request gets sent.
@@ -26,7 +16,19 @@ export default function UseAxiosPrivte() {
 	 */
 	useEffect(() => {
 		console.log("in use axios private");
-		const responceIntercept = axiosPrivate.interceptors.response.use(
+
+		const requestIntercept = axiosPrivate.interceptors.request.use(
+			(config) => {
+				// if the headers dont exist , its the inital request
+				if (!config.headers["Authorization"]) {
+					config.headers["Authorization"] = `Bearer ${auth?.accessToken}`;
+				}
+				return config;
+			},
+			(error) => Promise.reject(error)
+		);
+
+		const responseIntercept = axiosPrivate.interceptors.response.use(
 			(response) => response,
 			// if our token is expired
 			async (error) => {
@@ -46,10 +48,10 @@ export default function UseAxiosPrivte() {
 
 		return () => {
 			// remove interceptor when done
-			axiosPrivate.interceptors.response.eject(responceIntercept);
+			axiosPrivate.interceptors.response.eject(responseIntercept);
 			axiosPrivate.interceptors.request.eject(requestIntercept);
 		};
-	}, [auth.accessToken, refresh]);
+	}, [auth, refresh]);
 
 	return axiosPrivate;
 }

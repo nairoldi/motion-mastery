@@ -6,7 +6,7 @@ const authController = require('../auth/authController.js');
 const AuthRouter = express.Router();
 
 AuthRouter.get('/', async (req, res, next) => {
-    authController.handleRefreshToken(req, res, next);
+    await authController.handleRefreshToken(req, res, next);
 });
 
 

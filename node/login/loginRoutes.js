@@ -22,11 +22,11 @@ LoginRouter.use("", async (req, res, next) => {
 });
 
 LoginRouter.post("/signup", async (req, res, next) => {
-	loginController.createAccount(req, res, next);
+	await loginController.createAccount(req, res, next);
 });
 
 LoginRouter.post("/login", async (req, res, next) => {
-	loginController.signIn(req, res, next);
+	await loginController.signIn(req, res, next);
 });
 
 module.exports = { LoginRouter: LoginRouter };

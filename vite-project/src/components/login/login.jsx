@@ -38,9 +38,9 @@ export default function Login() {
 		console.log(email);
 		console.log(pass);
 		const login_user = { email: email, pass: pass };
-		console.log("user set");
+		//console.log("user set");
 		try {
-			console.log("in try");
+			//console.log("in try");
 			const responce = await axios.post(REGISTER_URL, login_user, {
 				headers: { "Content-Type": "application/json" },
 				withCredentials: true,
