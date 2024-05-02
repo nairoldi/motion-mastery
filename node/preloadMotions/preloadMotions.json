@@ -137,5 +137,114 @@
 	{
 		"name": "Good Mornings",
 		"primaryMuscle": "Lower Back"
+	},
+	{
+		"name": "Arnold Press",
+		"primaryMuscle": "Shoulders",
+		"secondaryMuscle": "Triceps"
+	},
+	{
+		"name": "Front Raises",
+		"primaryMuscle": "Front Shoulders"
+	},
+	{
+		"name": "Lateral Raises",
+		"primaryMuscle": "Lateral Shoulders"
+	},
+	{
+		"name": "Upright Rows",
+		"primaryMuscle": "Shoulders",
+		"secondaryMuscle": "Traps"
+	},
+	{
+		"name": "Shrugs",
+		"primaryMuscle": "Traps"
+	},
+	{
+		"name": "Hammer Curls",
+		"primaryMuscle": "Biceps"
+	},
+	{
+		"name": "Preacher Curls",
+		"primaryMuscle": "Biceps"
+	},
+	{
+		"name": "Reverse Flyes",
+		"primaryMuscle": "Rear Deltoids"
+	},
+	{
+		"name": "Dips",
+		"primaryMuscle": "Chest",
+		"secondaryMuscle": "Triceps"
+	},
+	{
+		"name": "Skull Crushers",
+		"primaryMuscle": "Triceps"
+	},
+	{
+		"name": "Leg Press Calf Raises",
+		"primaryMuscle": "Calves"
+	},
+	{
+		"name": "Seated Calf Raises",
+		"primaryMuscle": "Calves"
+	},
+	{
+		"name": "Barbell Hip Thrusts",
+		"primaryMuscle": "Glutes",
+		"secondaryMuscle": "Hamstrings"
+	},
+	{
+		"name": "Glute Bridges",
+		"primaryMuscle": "Glutes",
+		"secondaryMuscle": "Hamstrings"
+	},
+	{
+		"name": "Running",
+		"primaryMuscle": "Cardiovascular System"
+	},
+	{
+		"name": "Russian Twists with Medicine Ball",
+		"primaryMuscle": "Obliques"
+	},
+	{
+		"name": "Hanging Leg Raises",
+		"primaryMuscle": "Lower Abdominals"
+	},
+	{
+		"name": "Hollow Body Holds",
+		"primaryMuscle": "Abdominals"
+	},
+	{
+		"name": "Plank with Leg Lifts",
+		"primaryMuscle": "Abdominals"
+	},
+	{
+		"name": "Side Planks",
+		"primaryMuscle": "Obliques"
+	},
+	{
+		"name": "Windshield Wipers",
+		"primaryMuscle": "Obliques"
+	},
+	{
+		"name": "Dragon Flags",
+		"primaryMuscle": "Abdominals"
+	},
+	{
+		"name": "V-Ups",
+		"primaryMuscle": "Abdominals"
+	},
+	{
+		"name": "Dead Bug",
+		"primaryMuscle": "Abdominals"
+	},
+	{
+		"name": "Superman",
+		"primaryMuscle": "Lower Back"
+	},
+	{
+		"name": "Bird Dogs",
+		"primaryMuscle": "Lower Back"
 	}
 ]

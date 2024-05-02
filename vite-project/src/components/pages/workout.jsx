@@ -11,7 +11,10 @@ export default function WorkoutForm() {
 	const [sets, setSets] = useState(0);
 	const [reps, setReps] = useState(0);
 	const [time, setTime] = useState(0);
+	const [distance, setDistance] = useState(0);
 	const [weight, setWeight] = useState(0);
+	const [primaryMuscle, setPrimaryMuscle] = useState("");
+	const [secondaryMuscle, setSecondaryMuscle] = useState("");
 	const [addedMotions, setAddedMotions] = useState([]);
 
 	// to set focus on the form when the components load
@@ -32,6 +35,9 @@ export default function WorkoutForm() {
 				reps: reps,
 				time: time,
 				weight: weight,
+				distance: distance,
+				primaryMuscle: primaryMuscle,
+				secondaryMuscle: secondaryMuscle,
 			};
 			setAddedMotions([...addedMotions, motionToAdd]);
 			setSelectedMotion("");
@@ -39,7 +45,10 @@ export default function WorkoutForm() {
 			setSets(0);
 			setReps(0);
 			setTime(0);
+			setDistance(0);
 			setWeight(0);
+			setPrimaryMuscle("");
+			setSecondaryMuscle("");
 		}
 	};
 
@@ -72,6 +81,10 @@ export default function WorkoutForm() {
 			setSets(0);
 			setReps(0);
 			setTime(0);
+			setDistance(0);
+			setPrimaryMuscle("");
+			setSecondaryMuscle("");
+			setWorkoutName("");
 		} catch (err) {
 			console.error("Error creating workout:", err);
 		}
@@ -110,8 +123,17 @@ export default function WorkoutForm() {
 					<select
 						id="motions"
 						value={selectedMotion}
-						onChange={(e) => setSelectedMotion(e.target.value)}
-						className="mr-2 block flex-1 w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+						onChange={(e) => {
+							setSelectedMotion(e.target.value);
+							const selectedMotionData = preExistingMotionsData.find(
+								(motion) => motion.name === e.target.value
+							);
+							if (selectedMotionData) {
+								setPrimaryMuscle(selectedMotionData.primaryMuscle);
+								setSecondaryMuscle(selectedMotionData.secondaryMuscle);
+							}
+						}}
+						className="mr-2 block flex-1 w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
 					>
 						<option value="">Select a pre-existing motion</option>
 						{preExistingMotionsData.map((motion, index) => (
@@ -126,11 +148,42 @@ export default function WorkoutForm() {
 						value={newMotion}
 						onChange={(e) => setNewMotion(e.target.value)}
 						placeholder="Or type a new motion"
-						className="block flex-1 w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+						className="block flex-1 w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-md"
 					/>
 				</div>
 			</div>
-
+			<div className="mb-4">
+				<label
+					htmlFor="primaryMuscle"
+					className="block text-sm font-medium text-gray-700"
+				>
+					Primary Muscle:
+				</label>
+				<input
+					type="text"
+					id="primaryMuscle"
+					value={primaryMuscle}
+					onChange={(e) => setPrimaryMuscle(e.target.value)}
+					placeholder="Primary Muscle"
+					className="block flex-1 w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+				/>
+			</div>
+			<div className="mb-4">
+				<label
+					htmlFor="secondaryMuscle"
+					className="block text-sm font-medium text-gray-700"
+				>
+					Secondary Muscle:
+				</label>
+				<input
+					type="text"
+					id="secondaryMuscle"
+					value={secondaryMuscle}
+					onChange={(e) => setSecondaryMuscle(e.target.value)}
+					placeholder="Secondary Muscle"
+					className="block flex-1 w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+				/>
+			</div>
 			<div className="mb-4">
 				<label
 					htmlFor="sets"
@@ -166,7 +219,7 @@ export default function WorkoutForm() {
 					htmlFor="sets"
 					className="block text-sm font-medium text-gray-700"
 				>
-					weight:
+					weight (in pounds):
 				</label>
 				<input
 					type="number"
@@ -181,13 +234,29 @@ export default function WorkoutForm() {
 					htmlFor="time"
 					className="block text-sm font-medium text-gray-700"
 				>
-					Time (in seconds):
+					Time (in minutes):
 				</label>
 				<input
 					type="number"
 					id="time"
 					value={time}
 					onChange={(e) => setTime(parseInt(e.target.value))}
+					className="w-20 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+				/>
+			</div>
+
+			<div className="mb-4">
+				<label
+					htmlFor="sets"
+					className="block text-sm font-medium text-gray-700"
+				>
+					Distance (in miles):
+				</label>
+				<input
+					type="number"
+					id="sets"
+					value={distance}
+					onChange={(e) => setDistance(parseInt(e.target.value))}
 					className="w-20 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 				/>
 			</div>
@@ -211,7 +280,8 @@ export default function WorkoutForm() {
 						<div className="flex-1">{motion.name}</div>
 						<div className="ml-2">Sets: {motion.sets}</div>
 						<div className="ml-2">Reps: {motion.reps}</div>
-						<div className="ml-2">Time: {motion.time} seconds</div>
+						<div className="ml-2">Time: {motion.time} minutes`</div>
+						<div className="ml-2">Time: {motion.weight} pounds</div>
 						<button
 							type="button"
 							onClick={() => handleRemoveMotion(index)}
