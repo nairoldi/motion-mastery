@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const motionSchema = new mongoose.Schema({
+     user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User", // Reference to the User model
+        required: true,
+    },
     workout: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "workout",
@@ -18,6 +23,9 @@ const motionSchema = new mongoose.Schema({
         type: String,
     },
     reps: {
+        type: Number,
+    },
+    weight: {
         type: Number,
     },
     time: {

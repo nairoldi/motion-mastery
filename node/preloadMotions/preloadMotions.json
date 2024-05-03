@@ -1,0 +1,250 @@
+[
+	{
+		"name": "Squats",
+		"primaryMuscle": "Quadriceps",
+		"secondaryMuscle": "Glutes"
+	},
+	{
+		"name": "Lunges",
+		"primaryMuscle": "Quadriceps",
+		"secondaryMuscle": "Hamstrings"
+	},
+	{
+		"name": "Deadlifts",
+		"primaryMuscle": "Hamstrings",
+		"secondaryMuscle": "Lower Back"
+	},
+	{
+		"name": "Leg Press",
+		"primaryMuscle": "Quadriceps",
+		"secondaryMuscle": "Glutes"
+	},
+	{
+		"name": "Calf Raises",
+		"primaryMuscle": "Calves"
+	},
+	{
+		"name": "Leg Curls",
+		"primaryMuscle": "Hamstrings"
+	},
+	{
+		"name": "Leg Extensions",
+		"primaryMuscle": "Quadriceps"
+	},
+	{
+		"name": "Bench Press",
+		"primaryMuscle": "Chest",
+		"secondaryMuscle": "Triceps"
+	},
+	{
+		"name": "Pull-ups",
+		"primaryMuscle": "Back",
+		"secondaryMuscle": "Biceps"
+	},
+	{
+		"name": "Rows",
+		"primaryMuscle": "Back",
+		"secondaryMuscle": "Biceps"
+	},
+	{
+		"name": "Shoulder Press",
+		"primaryMuscle": "Shoulders",
+		"secondaryMuscle": "Triceps"
+	},
+	{
+		"name": "Bicep Curls",
+		"primaryMuscle": "Biceps"
+	},
+	{
+		"name": "Tricep Dips",
+		"primaryMuscle": "Triceps"
+	},
+	{
+		"name": "Lat Pulldowns",
+		"primaryMuscle": "Back",
+		"secondaryMuscle": "Biceps"
+	},
+	{
+		"name": "Crunches",
+		"primaryMuscle": "Abdominals"
+	},
+	{
+		"name": "Planks",
+		"primaryMuscle": "Abdominals"
+	},
+	{
+		"name": "Russian Twists",
+		"primaryMuscle": "Obliques"
+	},
+	{
+		"name": "Leg Raises",
+		"primaryMuscle": "Lower Abdominals"
+	},
+	{
+		"name": "Bicycle Crunches",
+		"primaryMuscle": "Abdominals"
+	},
+	{
+		"name": "Mountain Climbers",
+		"primaryMuscle": "Abdominals"
+	},
+	{
+		"name": "Woodchoppers",
+		"primaryMuscle": "Obliques"
+	},
+	{
+		"name": "Dumbbell Flyes",
+		"primaryMuscle": "Chest"
+	},
+	{
+		"name": "Incline Bench Press",
+		"primaryMuscle": "Upper Chest",
+		"secondaryMuscle": "Front Shoulders"
+	},
+	{
+		"name": "Decline Bench Press",
+		"primaryMuscle": "Lower Chest",
+		"secondaryMuscle": "Triceps"
+	},
+	{
+		"name": "Cable Crossovers",
+		"primaryMuscle": "Chest"
+	},
+	{
+		"name": "Push-ups",
+		"primaryMuscle": "Chest",
+		"secondaryMuscle": "Triceps"
+	},
+	{
+		"name": "Chest Dips",
+		"primaryMuscle": "Chest",
+		"secondaryMuscle": "Triceps"
+	},
+	{
+		"name": "T-bar Rows",
+		"primaryMuscle": "Back",
+		"secondaryMuscle": "Biceps"
+	},
+	{
+		"name": "Seated Rows",
+		"primaryMuscle": "Back",
+		"secondaryMuscle": "Biceps"
+	},
+	{
+		"name": "Hyperextensions",
+		"primaryMuscle": "Lower Back"
+	},
+	{
+		"name": "Good Mornings",
+		"primaryMuscle": "Lower Back"
+	},
+	{
+		"name": "Arnold Press",
+		"primaryMuscle": "Shoulders",
+		"secondaryMuscle": "Triceps"
+	},
+	{
+		"name": "Front Raises",
+		"primaryMuscle": "Front Shoulders"
+	},
+	{
+		"name": "Lateral Raises",
+		"primaryMuscle": "Lateral Shoulders"
+	},
+	{
+		"name": "Upright Rows",
+		"primaryMuscle": "Shoulders",
+		"secondaryMuscle": "Traps"
+	},
+	{
+		"name": "Shrugs",
+		"primaryMuscle": "Traps"
+	},
+	{
+		"name": "Hammer Curls",
+		"primaryMuscle": "Biceps"
+	},
+	{
+		"name": "Preacher Curls",
+		"primaryMuscle": "Biceps"
+	},
+	{
+		"name": "Reverse Flyes",
+		"primaryMuscle": "Rear Deltoids"
+	},
+	{
+		"name": "Dips",
+		"primaryMuscle": "Chest",
+		"secondaryMuscle": "Triceps"
+	},
+	{
+		"name": "Skull Crushers",
+		"primaryMuscle": "Triceps"
+	},
+	{
+		"name": "Leg Press Calf Raises",
+		"primaryMuscle": "Calves"
+	},
+	{
+		"name": "Seated Calf Raises",
+		"primaryMuscle": "Calves"
+	},
+	{
+		"name": "Barbell Hip Thrusts",
+		"primaryMuscle": "Glutes",
+		"secondaryMuscle": "Hamstrings"
+	},
+	{
+		"name": "Glute Bridges",
+		"primaryMuscle": "Glutes",
+		"secondaryMuscle": "Hamstrings"
+	},
+	{
+		"name": "Running",
+		"primaryMuscle": "Cardiovascular System"
+	},
+	{
+		"name": "Russian Twists with Medicine Ball",
+		"primaryMuscle": "Obliques"
+	},
+	{
+		"name": "Hanging Leg Raises",
+		"primaryMuscle": "Lower Abdominals"
+	},
+	{
+		"name": "Hollow Body Holds",
+		"primaryMuscle": "Abdominals"
+	},
+	{
+		"name": "Plank with Leg Lifts",
+		"primaryMuscle": "Abdominals"
+	},
+	{
+		"name": "Side Planks",
+		"primaryMuscle": "Obliques"
+	},
+	{
+		"name": "Windshield Wipers",
+		"primaryMuscle": "Obliques"
+	},
+	{
+		"name": "Dragon Flags",
+		"primaryMuscle": "Abdominals"
+	},
+	{
+		"name": "V-Ups",
+		"primaryMuscle": "Abdominals"
+	},
+	{
+		"name": "Dead Bug",
+		"primaryMuscle": "Abdominals"
+	},
+	{
+		"name": "Superman",
+		"primaryMuscle": "Lower Back"
+	},
+	{
+		"name": "Bird Dogs",
+		"primaryMuscle": "Lower Back"
+	}
+]

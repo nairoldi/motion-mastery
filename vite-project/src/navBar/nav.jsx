@@ -21,12 +21,12 @@ const NavBar = () => {
 								</Link>
 							</li>
 							<li>
-								<Link to="#" className="text-white hover:text-gray-300">
+								<Link to="/workouts" className="text-white hover:text-gray-300">
 									Workouts
 								</Link>
 							</li>
 							<li>
-								<Link to="#" className="text-white hover:text-gray-300">
+								<Link to="/stats" className="text-white hover:text-gray-300">
 									Stats
 								</Link>
 							</li>

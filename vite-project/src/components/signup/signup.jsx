@@ -3,7 +3,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import axios from "../../api/axios";
-import Login from "../Login/login";
 
 export default function Signup() {
 	const navigate = useNavigate();
@@ -20,22 +19,22 @@ export default function Signup() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(email);
-		console.log(pass);
-		console.log(user);
+		//console.log(email);
+		//console.log(pass);
+		//console.log(user);
 		const new_user = { email: email, pass: pass, user: user };
 
 		try {
-			const responce = await axios.post(REGISTER_URL, new_user, {
+			const response = await axios.post(REGISTER_URL, new_user, {
 				headers: { "Content-Type": "application/json" },
 				withCredentials: true,
 			});
 			// responce from server
-			console.log(responce.data);
-			console.log(responce.accessToken);
+			//console.log(responce.data);
+			//console.log(responce.accessToken);
 			// full responce object
-			console.log(JSON.stringify(responce));
-			if (responce.status == 201) navigate("/");
+			//console.log(JSON.stringify(responce));
+			if (response.status == 201) navigate("/");
 		} catch (err) {
 			if (!err?.response) {
 				setErrMsg("No Server Response");

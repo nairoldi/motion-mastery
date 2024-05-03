@@ -38,19 +38,19 @@ export default function Login() {
 		console.log(email);
 		console.log(pass);
 		const login_user = { email: email, pass: pass };
-		console.log("user set");
+		//console.log("user set");
 		try {
-			console.log("in try");
+			//console.log("in try");
 			const responce = await axios.post(REGISTER_URL, login_user, {
 				headers: { "Content-Type": "application/json" },
 				withCredentials: true,
 			});
-			console.log("token should be under here");
-			console.log(responce.data.accessToken);
+			//console.log("token should be under here");
+			//.log(responce.data.accessToken);
 			// responce from server
-			console.log(responce.data);
+			//console.log(responce.data);
 			// full responce object
-			console.log(JSON.stringify(responce));
+			//console.log(JSON.stringify(responce));
 			const token = responce?.data.accessToken;
 			setAuth({ email, token });
 			setEmail("");

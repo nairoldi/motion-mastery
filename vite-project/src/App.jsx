@@ -5,10 +5,12 @@ import Login from "./components/Login/login";
 import Signup from "./components/signup/signup";
 import NavBar from "./navBar/nav";
 import Home from "./components/home/home";
-import User from "./components/users/users";
+import MyInfo from "./components/pages/myInfo";
+import Workout from "./components/pages/workout";
 import "./App.css";
 import RequireAuth from "./components/auth/requireAuth";
 import Layout from "./components/layout/layout";
+import Heatmap from "./components/pages/stats";
 
 function App() {
 	const [currentForm, setCurrentForm] = useState("login");
@@ -26,7 +28,9 @@ function App() {
 						{/* private routes */}
 						<Route element={<RequireAuth />}>
 							<Route path="/home" element={<Home />} />
-							<Route path="/myInfo" element={<User />} />
+							<Route path="/myInfo" element={<MyInfo />} />
+							<Route path="/workouts" element={<Workout />} />
+							<Route path="/stats" element={<Heatmap />} />
 						</Route>
 					</Route>
 				</Routes>
