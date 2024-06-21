@@ -40,14 +40,14 @@ async function createAccount(req, res, next) {
 		res.status(201).send({ created: true });
 	} catch (error) {
 		console.log("new signup failed");
-		// console.log(error.message);
+		//console.log(`the error is ${error}`);
 		if (error.code == 11000) {
 			res.status(403).send({
 				created: false,
 				message: "Email already exists! try logging in",
 			});
 		} else {
-			res.status(409).send({ created: false, message: e.message });
+			res.status(409).send({ created: false, message: error.message });
 		}
 	}
 }
@@ -66,8 +66,18 @@ async function signIn(req, res, next) {
 
 			if (passCompare) {
 				console.log(user._id);
-				var accessToken = jwt.sign({ id: user._id }, process.env.jwtSecret, { expiresIn: "90s" });
-				var refreshToken = jwt.sign({ id: user._id }, process.env.refreshSecret,{ expiresIn: "1d" });
+				var accessToken = jwt.sign(
+					{ id: user._id },
+					process.env.jwtSecret,
+					{
+						expiresIn: "90s",
+					},
+				);
+				var refreshToken = jwt.sign(
+					{ id: user._id },
+					process.env.refreshSecret,
+					{ expiresIn: "1d" },
+				);
 				user.refreshToken = refreshToken;
 				await user.save();
 				//const hashed_token = bcrypt.hashSync(token, 10);
