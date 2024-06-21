@@ -18,8 +18,8 @@ function ValidateToken(req, res, next) {
 	const token = authHeader.split(" ")[1];
 	if (!token) {
 		return res.status(401).send({ message: "No token provided" });
-  }
- 
+	}
+
 	// should have token here , time to verify
 	jwt.verify(token, process.env.jwtSecret, (err, decoded) => {
 		if (err) {

@@ -18,7 +18,7 @@ LoginRouter.use("", async (req, res, next) => {
 	console.log(req.body);
 	//console.log(REQ_KEYS.path);
 	//sutil.verifyObject(req.body, REQ_KEYS[req.path], next);
-	next()
+	next();
 });
 
 LoginRouter.post("/signup", async (req, res, next) => {
