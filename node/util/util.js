@@ -11,7 +11,7 @@ function ValidateToken(req, res, next) {
 	//console.log(req.cookies.JWT_TOKEN);
 	//console.log(JSON.stringify(req.headers));
 	const authHeader = req.headers["authorization"];
-	console.log("Authorization Header:", JSON.stringify(authHeader));
+	console.log("Authorization Header received:", JSON.stringify(authHeader));
 	if (!authHeader) {
 		return res.status(401).send({ message: "no token recieved" });
 	}
@@ -24,7 +24,9 @@ function ValidateToken(req, res, next) {
 	jwt.verify(token, process.env.jwtSecret, (err, decoded) => {
 		if (err) {
 			console.log("failed jwt verification");
-			return res.status(403).send({ message: "this token is no longer valid" });
+			return res
+				.status(403)
+				.send({ message: "this token is no longer valid" });
 		}
 		// by now the token is valid and we can attatch the user to the request
 		//console.log(`decoded: ${JSON.stringify(decoded)}`);
