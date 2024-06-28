@@ -1,13 +1,19 @@
 // this will be things the user can get their workouts summaries
-const User = require("../user/userSchema");
+const User = require("./userSchema");
 const Motion = require("./userMotionSchema");
 const Workout = require("./userWorkoutSchema");
+const Weight = require("./userWeightSchema");
 const config = require("../config/loginConfig");
 
 async function getUserInfo(req, res, next) {
 	try {
-		const user = await User.findById({ _id: req.user });
-		console.log(user.createdDate);
+		const user = await User.findById(req.user)
+			.populate("weights") // Populate the weights array with actual weight documents
+			.exec();
+		if (!user) {
+			return res.status(404).json({ message: "User not found" });
+		}
+		//console.log(user.createdDate);
 		const workoutCount = await Workout.countDocuments({ user: req.user });
 		const userInfo = {
 			_id: user._id,
@@ -16,6 +22,11 @@ async function getUserInfo(req, res, next) {
 			email: user.email,
 			date: user.createdDate,
 			workoutCount: workoutCount,
+			weights: user.weights,
+			startingWeight: user.startingWeight,
+			currentWeight: user.currentWeight,
+			goalWeight: user.goalWeight,
+			weeklyGoal: user.weeklyGoal,
 		};
 		res.status(200).json(userInfo);
 	} catch (e) {

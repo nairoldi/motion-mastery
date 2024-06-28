@@ -11,6 +11,7 @@ import "./App.css";
 import RequireAuth from "./components/auth/requireAuth";
 import Layout from "./components/layout/layout";
 import Heatmap from "./components/pages/stats";
+import Goals from "./components/pages/goals";
 
 function App() {
 	const [currentForm, setCurrentForm] = useState("login");
@@ -34,6 +35,7 @@ function App() {
 							<Route path="/myInfo" element={<MyInfo />} />
 							<Route path="/workouts" element={<Workout />} />
 							<Route path="/stats" element={<Heatmap />} />
+							<Route path="/goals" element={<Goals />} />
 						</Route>
 					</Route>
 				</Routes>

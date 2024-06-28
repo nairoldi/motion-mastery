@@ -1,44 +1,49 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect, useRef } from "react";
-import UseAxiosPrivte from "../../hooks/useAxiosPrivate";
+import { Link } from "react-router-dom";
+import UseAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useRefreshToken from "../../hooks/useRefreshToken";
 import UseAuth from "../../hooks/useAuth";
 
 export default function MyInfo() {
-	const [userInfo, setUserInfo] = useState();
-	const axiosPrivate = UseAxiosPrivte();
+	const [userInfo, setUserInfo] = useState(null);
+	const [loading, setLoading] = useState(true);
+	const axiosPrivate = UseAxiosPrivate();
 	const refresh = useRefreshToken();
 
 	const REGISTER_URL = "/login/login";
 
 	useEffect(() => {
-		//
-		let isMounted = true;
-		// can cancle a request
 		const controller = new AbortController();
 		async function getUser() {
-			//console.log("in getUser frontend");
 			try {
 				const response = await axiosPrivate.get("/user/myInfo", {
-					Signal: controller.signal,
-					//headers: { Authorization: `Bearer ${auth.token}` },
+					signal: controller.signal,
 				});
-				//console.log(`myInfo response: ${JSON.stringify(response.data)}`);
-				isMounted && setUserInfo(response.data);
+				setUserInfo(response.data);
 			} catch (e) {
 				console.log("failed in users component");
 				console.error(e);
+			} finally {
+				setLoading(false);
 			}
 		}
 
 		getUser();
-		// clen up function runs as ismounted is set to false
+
 		return () => {
-			isMounted = false;
 			controller.abort();
 		};
 	}, []);
+
+	if (loading) {
+		return <div>Loading...</div>;
+	}
+
+	if (!userInfo) {
+		return <div>Error loading user info.</div>;
+	}
 
 	const dummyWorkouts = {
 		previousWorkout: {
@@ -158,18 +163,18 @@ export default function MyInfo() {
 
 			{/* Goals and Settings Links */}
 			<div className="flex space-x-4">
-				<a
-					href="/goals"
+				<Link
+					to="/goals"
 					className="bg-purple-700 text-white text-center py-2 px-4 rounded-lg shadow w-1/2 hover:bg-purple-900"
 				>
 					Go to Goals
-				</a>
-				<a
-					href="/settings"
+				</Link>
+				<Link
+					to="/settings"
 					className="bg-purple-700 text-white text-center py-2 px-4 rounded-lg shadow w-1/2 hover:bg-purple-900"
 				>
 					Go to Settings
-				</a>
+				</Link>
 			</div>
 		</article>
 	);
