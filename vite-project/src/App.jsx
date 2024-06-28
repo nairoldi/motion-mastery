@@ -11,6 +11,7 @@ import "./App.css";
 import RequireAuth from "./components/auth/requireAuth";
 import Layout from "./components/layout/layout";
 import Heatmap from "./components/pages/stats";
+import Goals from "./components/pages/goals";
 
 function App() {
 	const [currentForm, setCurrentForm] = useState("login");
@@ -24,13 +25,17 @@ function App() {
 						{/* public routes */}
 						<Route path="/" element={<Login />} />
 						<Route path="/signup" element={<Signup />} />
-						<Route path="*" element={<h1> 404 page not found</h1>} />
+						<Route
+							path="*"
+							element={<h1> 404 page not found</h1>}
+						/>
 						{/* private routes */}
 						<Route element={<RequireAuth />}>
 							<Route path="/home" element={<Home />} />
 							<Route path="/myInfo" element={<MyInfo />} />
 							<Route path="/workouts" element={<Workout />} />
 							<Route path="/stats" element={<Heatmap />} />
+							<Route path="/goals" element={<Goals />} />
 						</Route>
 					</Route>
 				</Routes>

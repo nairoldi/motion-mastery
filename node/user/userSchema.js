@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
 		minLength: 9,
 	},
 	refreshToken: {
-		type: String, 
+		type: String,
 	},
 	username: {
 		type: String,
@@ -28,12 +28,42 @@ const userSchema = new mongoose.Schema({
 		default: Date.now,
 	},
 	workouts: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
+		{
+			type: mongoose.Schema.Types.ObjectId,
 			ref: "Workout",
-			createdDate: Date.now(),
-        },
-    ],
+		},
+	],
+	weights: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Weight",
+		},
+	],
+	startingWeight: {
+		type: Number,
+		default: 0,
+	},
+	currentWeight: {
+		type: Number,
+		default: 0,
+	},
+	goalWeight: {
+		type: Number,
+		default: 0,
+	},
+	weeklyGoal: {
+		type: String,
+		enum: [
+			"lose 0.5 lbs per week",
+			"lose 1 lb per week",
+			"lose 1.5 lbs per week",
+			"lose 2 lbs per week",
+			"maintain weight",
+			"gain 0.5 lbs per week",
+			"gain 1 lb per week",
+		],
+		default: "maintain weight",
+	},
 });
 
 module.exports = mongoose.model("Users", userSchema);

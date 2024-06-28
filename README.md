@@ -13,3 +13,8 @@ This is a workout tracker web-app by Nico Airoldi. The tech stack is MERN (Mongo
 # Tests
 
     I am using jest for testing. To run tests open terminal and make sure you are in the node folder and run "npm test".
+
+# Latest to do / commit note:
+
+userInfo.jsx updated to show login streak, weight change, I have added a previous workout section and favorited workout sections that
+displays the lastest favorited and previous workout. The boxes for them can be clicked, i need to now set up the previous and favorite workout pages. go to goals and setting buttons added as well, those pages also need to be made. I also need to update the backend for the login streak, weight change , and favorite workout.
