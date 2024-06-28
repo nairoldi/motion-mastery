@@ -52,6 +52,7 @@ async function connect_mongo() {
 		console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 		if (process.env.NODE_ENV !== "test") {
 			await mongoose.connect(process.env.MONGO_URL);
+			console.log("we are on main db");
 		} else {
 			await mongoose.connect(process.env.MONGO_TEST_URL);
 		}

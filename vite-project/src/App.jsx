@@ -24,7 +24,10 @@ function App() {
 						{/* public routes */}
 						<Route path="/" element={<Login />} />
 						<Route path="/signup" element={<Signup />} />
-						<Route path="*" element={<h1> 404 page not found</h1>} />
+						<Route
+							path="*"
+							element={<h1> 404 page not found</h1>}
+						/>
 						{/* private routes */}
 						<Route element={<RequireAuth />}>
 							<Route path="/home" element={<Home />} />
